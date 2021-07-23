@@ -2,7 +2,7 @@
 {
     public static class IntExtensions
     {
-        public static int DigitSum(this int value)
+        public static int DigitSum(this int value) //extension method för att räkna ut siffersumma
         {
             int result = 0;
 

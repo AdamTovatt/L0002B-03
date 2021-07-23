@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PersonalIdentityValidator
@@ -17,5 +10,21 @@ namespace PersonalIdentityValidator
             InitializeComponent();
         }
 
+        private void SubmitButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Person person = Person.Create(PersonalIdentityNumberTextbox.Text, FirstNameTextbox.Text, SurnameTextbox.Text);
+
+                if (person.ValidCheckSum)
+                    OutputTextbox.Text = string.Format("Fullständigt namn: {0} {1}\nPersonnummer: {2}\nKön: {3}", person.FirstName, person.Surname, person.PersonalIdentityNumber, person.Gender == Gender.Male ? "Man" : "Kvinna");
+                else
+                    OutputTextbox.Text = "Personnummrets kontrollsiffra stämmer inte";
+            }
+            catch (Exception exception)
+            {
+                OutputTextbox.Text = exception.Message;
+            }
+        }
     }
 }
